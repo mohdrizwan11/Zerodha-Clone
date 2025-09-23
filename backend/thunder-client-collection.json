@@ -1,0 +1,163 @@
+{
+  "client": "Thunder Client",
+  "collectionName": "Zirodha Market API",
+  "dateExported": "2024-09-22T10:00:00.000Z",
+  "version": "1.1",
+  "folders": [
+    {
+      "_id": "market-data",
+      "name": "Market Data",
+      "containerId": "",
+      "created": "2024-09-22T10:00:00.000Z",
+      "sortNum": 10000
+    },
+    {
+      "_id": "marketstack-direct",
+      "name": "MarketStack Direct API",
+      "containerId": "",
+      "created": "2024-09-22T10:00:00.000Z",
+      "sortNum": 20000
+    }
+  ],
+  "requests": [
+    {
+      "_id": "test-connection",
+      "colId": "zirodha-market",
+      "containerId": "market-data",
+      "name": "Test API Connection",
+      "url": "http://localhost:4000/api/market/test-connection",
+      "method": "GET",
+      "sortNum": 10000,
+      "created": "2024-09-22T10:00:00.000Z",
+      "modified": "2024-09-22T10:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "get-watchlist",
+      "colId": "zirodha-market",
+      "containerId": "market-data",
+      "name": "Get Watchlist Data",
+      "url": "http://localhost:4000/api/market/watchlist",
+      "method": "GET",
+      "sortNum": 20000,
+      "created": "2024-09-22T10:00:00.000Z",
+      "modified": "2024-09-22T10:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "get-holdings",
+      "colId": "zirodha-market",
+      "containerId": "market-data",
+      "name": "Get Market Holdings",
+      "url": "http://localhost:4000/api/market/market-holdings",
+      "method": "GET",
+      "sortNum": 30000,
+      "created": "2024-09-22T10:00:00.000Z",
+      "modified": "2024-09-22T10:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "get-positions",
+      "colId": "zirodha-market",
+      "containerId": "market-data",
+      "name": "Get Market Positions",
+      "url": "http://localhost:4000/api/market/market-positions",
+      "method": "GET",
+      "sortNum": 40000,
+      "created": "2024-09-22T10:00:00.000Z",
+      "modified": "2024-09-22T10:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "get-stock",
+      "colId": "zirodha-market",
+      "containerId": "market-data",
+      "name": "Get Single Stock Data",
+      "url": "http://localhost:4000/api/market/stock/AAPL",
+      "method": "GET",
+      "sortNum": 50000,
+      "created": "2024-09-22T10:00:00.000Z",
+      "modified": "2024-09-22T10:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "get-intraday",
+      "colId": "zirodha-market",
+      "containerId": "market-data",
+      "name": "Get Intraday Data",
+      "url": "http://localhost:4000/api/market/intraday/AAPL",
+      "method": "GET",
+      "sortNum": 60000,
+      "created": "2024-09-22T10:00:00.000Z",
+      "modified": "2024-09-22T10:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "marketstack-eod",
+      "colId": "zirodha-market",
+      "containerId": "marketstack-direct",
+      "name": "MarketStack End of Day",
+      "url": "http://api.marketstack.com/v2/eod",
+      "method": "GET",
+      "sortNum": 70000,
+      "created": "2024-09-22T10:00:00.000Z",
+      "modified": "2024-09-22T10:00:00.000Z",
+      "headers": [],
+      "params": [
+        {
+          "name": "access_key",
+          "value": "0ad71c23a85e1d4edec0eee5b1a8baff",
+          "isPath": false
+        },
+        {
+          "name": "symbols",
+          "value": "AAPL",
+          "isPath": false
+        }
+      ],
+      "tests": []
+    },
+    {
+      "_id": "marketstack-intraday",
+      "colId": "zirodha-market",
+      "containerId": "marketstack-direct",
+      "name": "MarketStack Intraday",
+      "url": "http://api.marketstack.com/v2/intraday",
+      "method": "GET",
+      "sortNum": 80000,
+      "created": "2024-09-22T10:00:00.000Z",
+      "modified": "2024-09-22T10:00:00.000Z",
+      "headers": [],
+      "params": [
+        {
+          "name": "access_key",
+          "value": "0ad71c23a85e1d4edec0eee5b1a8baff",
+          "isPath": false
+        },
+        {
+          "name": "symbols",
+          "value": "AAPL",
+          "isPath": false
+        },
+        {
+          "name": "interval",
+          "value": "1min",
+          "isPath": false
+        }
+      ],
+      "tests": []
+    }
+  ]
+}
