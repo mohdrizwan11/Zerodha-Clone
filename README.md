@@ -1,14 +1,13 @@
 # Zirodha Trading Platform
 
-A comprehensive trading platform inspired by Zerodha, featuring a complete trading ecosystem with frontend, backend, and dashboard applications.
+A comprehensive trading platform inspired by Zerodha, featuring a complete trading ecosystem with frontend and backend applications.
 
 ## 🏗️ Project Structure
 
 ```
 Zirodha/
-├── frontend/          # Main website with landing pages and user interface
+├── frontend/          # Main website with landing pages and trading interface
 ├── backend/           # API server with authentication and data management
-├── dashboard/         # Trading dashboard for portfolio management
 ├── .gitignore        # Git ignore rules
 └── README.md         # This file
 ```
@@ -17,12 +16,16 @@ Zirodha/
 
 ### 1. Frontend (`/frontend`)
 - **Technology**: React.js
-- **Purpose**: Main website with landing pages, authentication, and user onboarding
+- **Purpose**: Main website with landing pages, authentication, and trading dashboard
 - **Features**:
   - Landing pages (Home, About, Pricing, Products, Support)
   - User authentication (Login/Signup)
   - Protected routes
-  - Trading dashboard integration
+  - Integrated trading dashboard functionality
+  - Portfolio overview and management
+  - Holdings and positions tracking
+  - Order placement and management
+  - Market watchlist
   - Responsive design with Font Awesome icons
 
 ### 2. Backend (`/backend`)
@@ -35,17 +38,6 @@ Zirodha/
   - Market data integration
   - Middleware for authentication
   - API testing collection (Thunder Client)
-
-### 3. Dashboard (`/dashboard`)
-- **Technology**: React.js
-- **Purpose**: Trading dashboard for portfolio and market analysis
-- **Features**:
-  - Portfolio overview
-  - Holdings and positions management
-  - Order placement and tracking
-  - Market watchlist
-  - Interactive charts (Doughnut charts, vertical graphs)
-  - Fund management
 
 ## 🚀 Getting Started
 
@@ -75,12 +67,6 @@ Zirodha/
    cd ../backend
    npm install
    ```
-   
-   For Dashboard:
-   ```bash
-   cd ../dashboard
-   npm install
-   ```
 
 3. **Environment Setup**
    
@@ -103,12 +89,6 @@ Zirodha/
    Start Frontend (Terminal 2):
    ```bash
    cd frontend
-   npm start
-   ```
-   
-   Start Dashboard (Terminal 3):
-   ```bash
-   cd dashboard
    npm start
    ```
 
@@ -201,36 +181,7 @@ backend/
 └── package.json
 ```
 
-### Dashboard Structure
-```
-dashboard/
-├── public/
-│   ├── index.html
-│   └── logo.png
-├── src/
-│   ├── components/
-│   │   ├── Dashboard.js
-│   │   ├── Holdings.js
-│   │   ├── Positions.js
-│   │   ├── Orders.js
-│   │   ├── WatchList.js
-│   │   ├── Summary.js
-│   │   ├── Menu.js
-│   │   ├── TopBar.js
-│   │   ├── Funds.js
-│   │   ├── DoughnoutChart.js
-│   │   ├── VerticalGraph.js
-│   │   ├── BuyActionWindow.js
-│   │   └── Apps.js
-│   ├── contexts/
-│   │   ├── AuthContext.js
-│   │   └── GeneralContext.js
-│   ├── data/
-│   │   └── data.js
-│   ├── index.js
-│   └── index.css
-└── package.json
-```
+
 
 ## 🛡️ Security Notes
 
@@ -259,7 +210,7 @@ Detailed API documentation can be found in the Thunder Client collection file.
 ## 🐛 Troubleshooting
 
 ### Common Issues
-1. **Port conflicts**: Make sure ports 3000, 3001, 3002 are available
+1. **Port conflicts**: Make sure ports 3000 and 3001 are available
 2. **Dependencies**: Run `npm install` in each directory if modules are missing
 3. **Environment variables**: Ensure `.env` file is properly configured in backend
 
