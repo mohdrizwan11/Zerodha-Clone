@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../../contexts/AuthContext";
+import API_BASE_URL from "../../config/api";
 
 const Positions = () => {
   const [holdings, setHoldings] = useState([]);
@@ -12,7 +13,7 @@ const Positions = () => {
     const fetchHoldings = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('http://localhost:4000/api/market/user-holdings', {
+        const response = await axios.get(`${API_BASE_URL}/api/market/user-holdings`, {
           withCredentials: true
         });
         
@@ -54,7 +55,7 @@ const Positions = () => {
     if (!confirmed) return;
 
     try {
-      const response = await axios.put(`http://localhost:4000/api/market/user-holdings/${holdingId}`, {
+      const response = await axios.put(`${API_BASE_URL}/api/market/user-holdings/${holdingId}`, {
         quantity: currentQuantity - sellQuantity,
         notes: `Sold ${sellQuantity} shares of ${symbol} at $${averagePrice}`
       }, {
@@ -64,7 +65,7 @@ const Positions = () => {
       if (response.data.success) {
         alert(`✅ Successfully sold ${sellQuantity} shares of ${symbol} for $${totalValue}!`);
         // Refresh holdings
-        const updatedResponse = await axios.get('http://localhost:4000/api/market/user-holdings', {
+        const updatedResponse = await axios.get(`${API_BASE_URL}/api/market/user-holdings`, {
           withCredentials: true
         });
         if (updatedResponse.data.success) {

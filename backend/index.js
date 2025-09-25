@@ -26,7 +26,12 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3001'], // your frontend URLs
+  origin: [
+    'http://localhost:3000', 
+    'http://localhost:3001',
+    'https://zerodha-frontend.vercel.app',
+    'https://zerodha-clone.vercel.app'
+  ], // your frontend URLs
   credentials: true
 }));
 

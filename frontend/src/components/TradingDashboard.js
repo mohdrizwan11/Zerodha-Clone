@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import API_BASE_URL from '../config/api';
 import WatchList from './trading/WatchList';
 import Holdings from './trading/Holdings';
 import Positions from './trading/Positions';
@@ -19,7 +20,7 @@ function TradingDashboard() {
     const fetchHoldings = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('http://localhost:4000/api/market/user-holdings', {
+        const response = await axios.get(`${API_BASE_URL}/api/market/user-holdings`, {
           withCredentials: true
         });
         

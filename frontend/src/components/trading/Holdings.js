@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../../contexts/AuthContext";
+import API_BASE_URL from "../../config/api";
 
 const Holdings = () => {
   const [allHoldings, setAllHoldings] = useState([]);
@@ -12,7 +13,7 @@ const Holdings = () => {
     const fetchHoldings = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('http://localhost:4000/api/market/user-holdings', {
+        const response = await axios.get(`${API_BASE_URL}/api/market/user-holdings`, {
           withCredentials: true
         });
         

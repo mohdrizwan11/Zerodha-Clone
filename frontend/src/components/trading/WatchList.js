@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
+import API_BASE_URL from "../../config/api";
 import { Tooltip, Grow } from "@mui/material";
 import {
   BarChartOutlined, 
@@ -39,7 +40,7 @@ const WatchList = () => {
   const fetchWatchlistData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:4000/api/market/user-watchlist', {
+      const response = await axios.get(`${API_BASE_URL}/api/market/user-watchlist`, {
         withCredentials: true
       });
       
@@ -73,7 +74,7 @@ const WatchList = () => {
     
     try {
       setAdding(true);
-      const response = await axios.post('http://localhost:4000/api/market/user-watchlist', {
+      const response = await axios.post(`${API_BASE_URL}/api/market/user-watchlist`, {
         symbol: searchSymbol.toUpperCase(),
         alertPrice: null,
         notes: ''
@@ -104,7 +105,7 @@ const WatchList = () => {
     console.log('Attempting to remove symbol:', symbol);
     
     try {
-      const response = await axios.delete(`http://localhost:4000/api/market/user-watchlist/${symbol}`, {
+      const response = await axios.delete(`${API_BASE_URL}/api/market/user-watchlist/${symbol}`, {
         withCredentials: true
       });
       
@@ -140,7 +141,7 @@ const WatchList = () => {
     if (!confirmed) return;
 
     try {
-      const response = await axios.post('http://localhost:4000/api/market/user-holdings', {
+      const response = await axios.post(`${API_BASE_URL}/api/market/user-holdings`, {
         symbol: symbol,
         quantity: parseInt(quantity),
         averagePrice: parseFloat(price),
