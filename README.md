@@ -1,4 +1,4 @@
-# Zirodha Trading Platform
+# Zerodha Trading Platform
 
 A comprehensive trading platform inspired by Zerodha, featuring a complete trading ecosystem with frontend and backend applications.
 
