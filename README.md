@@ -1,6 +1,39 @@
-# Zerodha Trading Platform
+# 🚀 Zerodha Clone - Full Stack Trading Platform
 
-A comprehensive trading platform inspired by Zerodha, featuring a complete trading ecosystem with frontend and backend applications.
+A comprehensive full-stack trading platform inspired by Zerodha, featuring complete trading functionality with user authentication, portfolio management, and real-time market data integration.
+
+## 🌐 Live Demo
+- **Frontend (React)**: https://zirodha-eleven.vercel.app/
+- **Backend API (Node.js)**: https://zerodha-backend-g85e.onrender.com/
+
+## ✨ Key Features
+
+### 🔐 Authentication System
+- User registration and login
+- JWT-based secure authentication
+- Protected routes and middleware
+- Session management
+
+### 📊 Trading Dashboard
+- Real-time portfolio overview
+- Holdings and positions tracking
+- Interactive watchlist management
+- Buy/Sell order placement
+- Profit/Loss calculations
+
+### 🎨 User Interface
+- Responsive design for all devices
+- Modern Material-UI components
+- Interactive charts and graphs
+- Intuitive navigation and UX
+- Font Awesome icons integration
+
+### 🔗 API Integration
+- RESTful API architecture
+- MongoDB database integration
+- Market data services
+- Real-time data updates
+- Error handling and validation
 
 ## 🏗️ Project Structure
 
@@ -220,9 +253,52 @@ Detailed API documentation can be found in the Thunder Client collection file.
 - Ensure database connections are working
 - Check network connectivity for API calls
 
-## 📄 License
+## � Deployment
 
-This project is for educational and development purposes.
+This project is deployed using modern cloud platforms:
+
+### Backend Deployment (Render)
+- **Platform**: Render.com
+- **Database**: MongoDB Atlas
+- **Environment**: Node.js production environment
+- **Live URL**: https://zerodha-backend-g85e.onrender.com/
+
+### Frontend Deployment (Vercel)
+- **Platform**: Vercel
+- **Build**: Optimized React production build
+- **CDN**: Global edge network for fast loading
+- **Live URL**: https://zirodha-eleven.vercel.app/
+
+### Environment Variables
+The application uses environment variables for secure configuration:
+- `MONGO_URL`: MongoDB Atlas connection string
+- `JWT_SECRET`: JSON Web Token secret key
+- `SESSION_SECRET`: Session management secret
+- `REACT_APP_API_URL`: Frontend API base URL
+
+## Thanks to Apna College 
+
+## 🤝 Connect & Contact
+
+**K Mohammad Rizwan**
+
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mohdrizwan11)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mohdrizwan11/)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:kmohammadrizwan11@gmail.com)
+
+- **GitHub**: https://github.com/mohdrizwan11
+- **LinkedIn**: https://www.linkedin.com/in/mohdrizwan11/  
+- **Email**: kmohammadrizwan11@gmail.com
+
+Feel free to reach out for collaboration, feedback, or any questions about this project!
+
+## ⭐ Show Your Support
+
+If you found this project helpful, please consider giving it a ⭐ on GitHub!
+
+## �📄 License
+
+This project is for educational and development purposes. Built with ❤️ by K Mohammad Rizwan.
 
 ---
 
