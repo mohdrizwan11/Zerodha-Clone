@@ -36,23 +36,32 @@ app.use(cors({
     
     console.log('CORS check - Request origin:', origin);
     
-    // Allow requests with no origin (like mobile apps or curl requests)
+    // Allow requests with no origin (like mobile apps, curl, or same-origin requests)
     if (!origin) {
       console.log('CORS - No origin, allowing request');
       return callback(null, true);
     }
     
+    // Check if origin is in allowed list
     if (allowedOrigins.includes(origin)) {
       console.log('CORS - Origin allowed:', origin);
-      callback(null, true);
-    } else {
-      console.log('CORS blocked origin:', origin);
-      callback(new Error('Not allowed by CORS'));
+      return callback(null, true);
     }
+    
+    // Log blocked origin for debugging
+    console.log('CORS blocked origin:', origin);
+    return callback(null, false); // Don't throw error, just deny
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie', 'X-Requested-With'],
+  allowedHeaders: [
+    'Content-Type', 
+    'Authorization', 
+    'Cookie', 
+    'X-Requested-With',
+    'Accept',
+    'Origin'
+  ],
   exposedHeaders: ['Set-Cookie'],
   optionsSuccessStatus: 200,
   preflightContinue: false
@@ -64,13 +73,16 @@ app.use((req, res, next) => {
   next();
 });
 
-// Explicit OPTIONS handler for preflight requests
-app.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Origin', req.headers.origin);
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Cookie, X-Requested-With');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.sendStatus(200);
+// Handle preflight OPTIONS requests
+app.use((req, res, next) => {
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Cookie, X-Requested-With');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    return res.sendStatus(200);
+  }
+  next();
 });
 
 // Test endpoint to verify CORS is working
@@ -80,6 +92,16 @@ app.get('/api/test', (req, res) => {
     message: 'CORS is working!', 
     timestamp: new Date().toISOString(),
     origin: req.headers.origin 
+  });
+});
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({ 
+    status: 'ok', 
+    message: 'Server is running',
+    timestamp: new Date().toISOString(),
+    cors: 'configured'
   });
 });
 
