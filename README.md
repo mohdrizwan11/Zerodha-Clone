@@ -3,7 +3,7 @@
 A comprehensive full-stack trading platform inspired by Zerodha, featuring complete trading functionality with user authentication, portfolio management, and real-time market data integration.
 
 ## 🌐 Live Demo
-- **Frontend (React)**: https://zirodha-eleven.vercel.app/
+- **Frontend (React)**: https://zirodha-one.vercel.app/
 - **Backend API (Node.js)**: https://zerodha-backend-g85e.onrender.com/
 
 ## ✨ Key Features
