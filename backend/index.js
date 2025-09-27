@@ -26,11 +26,23 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: [
-    'http://localhost:3000', 
-    'http://localhost:3001',
-    'https://zirodha-eleven.vercel.app'
-  ], // your frontend URLs
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      'http://localhost:3000', 
+      'http://localhost:3001',
+      'https://zirodha-eleven.vercel.app'
+    ];
+    
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.log('CORS blocked origin:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
@@ -418,7 +430,36 @@ app.get('/allUserHoldings', async (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.send('Backend server is running!');
+  res.json({
+    success: true,
+    message: 'Backend server is running!',
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV,
+    port: PORT
+  });
+});
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({
+    success: true,
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    environment: process.env.NODE_ENV,
+    mongoConnected: mongoose.connection.readyState === 1
+  });
+});
+
+// Simple test endpoint for debugging
+app.get('/api/test', (req, res) => {
+  res.json({
+    success: true,
+    message: 'API is working!',
+    timestamp: new Date().toISOString(),
+    cors: req.headers.origin,
+    userAgent: req.headers['user-agent']
+  });
 });
 
 // Global error handler

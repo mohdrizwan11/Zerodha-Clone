@@ -47,6 +47,8 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
+      console.log('Login attempt to:', `${API_BASE_URL}/api/auth/login`);
+      
       const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
@@ -59,7 +61,15 @@ export const AuthProvider = ({ children }) => {
         }),
       });
 
+      console.log('Login response status:', response.status);
+      
+      if (!response.ok) {
+        console.error('Login response not ok:', response.status, response.statusText);
+        return { success: false, message: `Server error: ${response.status}` };
+      }
+
       const data = await response.json();
+      console.log('Login response data:', data);
 
       if (data.success) {
         setUser(data.user);
@@ -68,12 +78,15 @@ export const AuthProvider = ({ children }) => {
         return { success: false, message: data.message || 'Login failed' };
       }
     } catch (error) {
-      return { success: false, message: 'Network error. Please try again.' };
+      console.error('Login network error:', error);
+      return { success: false, message: `Network error: ${error.message}` };
     }
   };
 
   const signup = async (userData) => {
     try {
+      console.log('Signup attempt to:', `${API_BASE_URL}/api/auth/signup`);
+      
       const response = await fetch(`${API_BASE_URL}/api/auth/signup`, {
         method: 'POST',
         headers: {
@@ -89,7 +102,15 @@ export const AuthProvider = ({ children }) => {
         }),
       });
 
+      console.log('Signup response status:', response.status);
+
+      if (!response.ok) {
+        console.error('Signup response not ok:', response.status, response.statusText);
+        return { success: false, message: `Server error: ${response.status}` };
+      }
+
       const data = await response.json();
+      console.log('Signup response data:', data);
 
       if (data.success) {
         return { success: true, message: 'Account created successfully!' };
@@ -97,7 +118,8 @@ export const AuthProvider = ({ children }) => {
         return { success: false, message: data.message || 'Signup failed' };
       }
     } catch (error) {
-      return { success: false, message: 'Network error. Please try again.' };
+      console.error('Signup network error:', error);
+      return { success: false, message: `Network error: ${error.message}` };
     }
   };
 

@@ -83,6 +83,15 @@ module.exports.Login = async (req, res) => {
 };
 
 module.exports.Logout = (req, res) => {
-  res.clearCookie(COOKIE_NAME);
-  res.json({ success: true, message: 'Logged out' });
+  try {
+    res.clearCookie(COOKIE_NAME, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+    });
+    res.json({ success: true, message: 'Logged out successfully' });
+  } catch (error) {
+    console.error('Logout error:', error);
+    res.status(500).json({ success: false, message: 'Logout failed' });
+  }
 };
