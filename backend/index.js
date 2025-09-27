@@ -101,7 +101,17 @@ app.get('/api/health', (req, res) => {
     status: 'ok', 
     message: 'Server is running',
     timestamp: new Date().toISOString(),
-    cors: 'configured'
+    cors: 'configured',
+    origin: req.headers.origin || 'no-origin'
+  });
+});
+
+// Test CORS endpoint
+app.get('/api/test-cors', (req, res) => {
+  res.json({
+    message: 'CORS is working!',
+    origin: req.headers.origin,
+    timestamp: new Date().toISOString()
   });
 });
 
