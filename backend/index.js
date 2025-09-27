@@ -30,13 +30,20 @@ app.use(cors({
     const allowedOrigins = [
       'http://localhost:3000', 
       'http://localhost:3001',
-      'https://zirodha-eleven.vercel.app'
+      'https://zirodha-eleven.vercel.app',
+      'https://zirodha-one.vercel.app'
     ];
     
+    console.log('CORS check - Request origin:', origin);
+    
     // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
+    if (!origin) {
+      console.log('CORS - No origin, allowing request');
+      return callback(null, true);
+    }
     
     if (allowedOrigins.includes(origin)) {
+      console.log('CORS - Origin allowed:', origin);
       callback(null, true);
     } else {
       console.log('CORS blocked origin:', origin);
@@ -45,10 +52,36 @@ app.use(cors({
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie', 'X-Requested-With'],
   exposedHeaders: ['Set-Cookie'],
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
+  preflightContinue: false
 }));
+
+// Debug middleware to log requests
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url} - Origin: ${req.headers.origin}`);
+  next();
+});
+
+// Explicit OPTIONS handler for preflight requests
+app.options('*', (req, res) => {
+  res.header('Access-Control-Allow-Origin', req.headers.origin);
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Cookie, X-Requested-With');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.sendStatus(200);
+});
+
+// Test endpoint to verify CORS is working
+app.get('/api/test', (req, res) => {
+  res.json({ 
+    success: true, 
+    message: 'CORS is working!', 
+    timestamp: new Date().toISOString(),
+    origin: req.headers.origin 
+  });
+});
 
 // Use routes
 app.use('/api/auth', authRoutes);

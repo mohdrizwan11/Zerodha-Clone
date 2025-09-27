@@ -11,5 +11,6 @@ router.post('/logout', Logout);
 
 // verify cookie route (used by frontend home logic)
 router.post('/verify', userVerification);
+router.get('/verify', userVerification);
 
 module.exports = router;
