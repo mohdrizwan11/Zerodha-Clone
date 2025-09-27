@@ -31,7 +31,11 @@ app.use(cors({
     'http://localhost:3001',
     'https://zirodha-eleven.vercel.app'
   ], // your frontend URLs
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+  exposedHeaders: ['Set-Cookie'],
+  optionsSuccessStatus: 200
 }));
 
 // Use routes
@@ -417,9 +421,35 @@ app.get('/', (req, res) => {
   res.send('Backend server is running!');
 });
 
-app.listen(PORT, () => {
-    console.log(`App is started on port ${PORT}`);
-    mongoose.connect(MONGO_URL)
-      .then(() => console.log('Connected to MongoDB'))
-      .catch(err => console.error('MongoDB connection error:', err));
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error('Global error handler:', err);
+  res.status(500).json({ 
+    success: false, 
+    message: 'Internal server error',
+    error: process.env.NODE_ENV === 'development' ? err.message : undefined
+  });
 });
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({ 
+    success: false, 
+    message: `Route ${req.originalUrl} not found` 
+  });
+});
+
+mongoose.connect(MONGO_URL)
+  .then(() => {
+    console.log('Connected to MongoDB');
+    app.listen(PORT, () => {
+      console.log(`App is started on port ${PORT}`);
+      console.log('Environment:', process.env.NODE_ENV);
+      console.log('MongoDB URL configured:', !!MONGO_URL);
+      console.log('JWT Secret configured:', !!(process.env.TOKEN_KEY || process.env.JWT_SECRET));
+    });
+  })
+  .catch(err => {
+    console.error('MongoDB connection error:', err);
+    process.exit(1);
+  });

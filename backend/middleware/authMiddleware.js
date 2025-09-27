@@ -8,7 +8,7 @@ const COOKIE_NAME = process.env.COOKIE_NAME || 'token';
 async function getUserFromToken(token) {
   if (!token) return null;
   try {
-    const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+    const decoded = jwt.verify(token, process.env.TOKEN_KEY || process.env.JWT_SECRET);
     const user = await User.findById(decoded.id).select('-password');
     return user || null;
   } catch (err) {
@@ -50,7 +50,7 @@ async function userVerification(req, res) {
     const token = (req.cookies && req.cookies[COOKIE_NAME]) || null;
     if (!token) return res.json({ status: false });
 
-    jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {
+    jwt.verify(token, process.env.TOKEN_KEY || process.env.JWT_SECRET, async (err, data) => {
       if (err) return res.json({ status: false });
 
       const user = await User.findById(data.id).select('-password');
